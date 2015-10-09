@@ -12,6 +12,7 @@ Via Composer
 
 ``` bash
 composer require code4interactive/menu
+php artisan vendor:publish --provider="Code4\Menu\MenuServiceProvider"
 ```
 
 ## Usage
