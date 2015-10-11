@@ -13,10 +13,17 @@
             "email": "artur.bartczak@code4.pl"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/code4interactive/view"
+        }
+    ],
     "require": {
         "php" : ">=5.3.0",
         "illuminate/support" : "~5.0",
         "illuminate/contracts" : "~5.0",
+        "code4interactive/view": "*",
         "symfony/yaml": "2.7.*",
         "laravelcollective/html": "5.1.*"
     },

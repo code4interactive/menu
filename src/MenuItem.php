@@ -7,6 +7,8 @@
 
 namespace Code4\Menu;
 
+use Code4\View\Attributes;
+
 class MenuItem {
 
     private $key;
@@ -28,7 +30,7 @@ class MenuItem {
     public function __construct($key, $item) {
         $this->key = $key;
 
-        $this->url = array_key_exists('url', $item) ? $item['url'] : '';
+        array_key_exists('url', $item) ? $this->setUrl($item['url']) : null;
         $this->icon = array_key_exists('icon', $item) ? $item['icon'] : '';
         $this->attributes = array_key_exists('attributes', $item) ? new Attributes($item['attributes']) : new Attributes();
         $this->collection_attributes = array_key_exists('collection_attributes', $item) ? new Attributes($item['collection_attributes']) : new Attributes();
@@ -137,7 +139,7 @@ class MenuItem {
      */
     public function setUrl($url)
     {
-        $this->url = $url;
+        $this->url = '/' . ltrim($url, '/');
         return $this;
     }
 
