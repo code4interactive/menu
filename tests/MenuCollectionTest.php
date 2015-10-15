@@ -21,7 +21,6 @@ class MenuCollectionTest extends TestCase
     public function testOrder()
     {
         $menuCollection = new MenuCollection($this->exampleOrder);
-
         //Test list order
         $lp = 1;
         foreach($menuCollection->toArray() as $el) {
@@ -32,5 +31,21 @@ class MenuCollectionTest extends TestCase
         //Test setting the order
         $menuCollection->setOrder('pos1', 2);
         $this->assertEquals('pos1', $menuCollection->toArray()[1]->getKey());
+    }
+
+    public function testActiveByPath()
+    {
+        $menuCollection = new MenuCollection($this->exampleMenu);
+        $menuCollection->setActiveByPath('settings.ogolne');
+
+        $this->assertEquals(true, $menuCollection->get('settings.ogolne')->active());
+    }
+
+    public function testActiveByUrl()
+    {
+        $menuCollection = new MenuCollection($this->exampleMenu);
+        $menuCollection->setActiveByUrl('settings/general');
+
+        $this->assertEquals(true, $menuCollection->get('settings.ogolne')->active());
     }
 }

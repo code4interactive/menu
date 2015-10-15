@@ -10,7 +10,7 @@ class MenuServiceProvider extends ServiceProvider {
 
     public function register() {
         $this->app->singleton('menu', function($app) {
-            return new Menu($app['files'], $app['config'], $app['url']);
+            return new Menu($app['files'], $app['config'], $app['request']);
         });
 
         $this->registerAliases();

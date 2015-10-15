@@ -1,7 +1,7 @@
 <?php
 namespace Code4\Menu;
 
-use Illuminate\Routing\UrlGenerator;
+use Illuminate\Http\Request;
 use Symfony\Component\Yaml\Yaml;
 use Illuminate\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
@@ -9,15 +9,14 @@ use Illuminate\Filesystem\Filesystem;
 class Menu {
     private $filesystem;
     private $config;
-    private $url;
-    private $html;
+    private $request;
 
     protected $menus = [];
 
-    public function __construct(Filesystem $filesystem, Repository $config, UrlGenerator $url) {
+    public function __construct(Filesystem $filesystem, Repository $config, Request $request) {
         $this->filesystem = $filesystem;
         $this->config = $config;
-        $this->url = $url;
+        $this->request = $request;
     }
 
     /**
@@ -30,7 +29,7 @@ class Menu {
         }
 
         foreach ($menus as $menuName => $menu) {
-            $this->menus[$menuName] = new $menu($menuName, $this->filesystem, $this->url);
+            $this->menus[$menuName] = new $menu($menuName, $this->filesystem, $this->request);
             $menuData = $this->menus[$menuName]->getConfig();
 
             $this->menus[$menuName]->build($menuData);
@@ -51,10 +50,6 @@ class Menu {
         }
         return $this->menus[$menuName];
     }
-
-
-
-
 
 
     ////HELPERS

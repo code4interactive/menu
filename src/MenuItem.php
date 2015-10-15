@@ -46,20 +46,57 @@ class MenuItem {
      * @return bool
      */
     public function hasChildren(){
-        return (bool) is_a($this->collection, 'Code4\Menu\MenuCollection') ? $this->collection->count() : false;
+        return (bool) is_object($this->collection) ? $this->collection->count() : false;
+    }
+
+    /**
+     * Sets active path by dot notated path
+     * @param $key
+     * @return bool|void
+     * @throws \Exception
+     */
+    public function setActiveByPath($key) {
+        $this->active(true);
+        if (!$key || !$this->hasChildren()) { return null; }
+        return $this->collection->setActiveByPath($key);
+    }
+
+    /**
+     * Sets active path by url
+     * @param $url
+     * @return bool
+     */
+    public function setActiveByUrl($url) {
+        if ($this->url == '/' . ltrim($url, '/')) {
+            $this->active(true);
+            $this->collection_attributes->add('class', 'active');
+            return true;
+        }
+        if (!$this->hasChildren()) { return false; }
+        if ($this->collection->setActiveByUrl($url)) {
+            $this->collection_attributes->add('class', 'active');
+            return true;
+        }
+        return false;
     }
 
     /**
      * Sets menu element active
-     * @param bool $activate
+     * @return $this|bool
      */
-    public function active($activate = true) {
-        if ($activate) {
-            $this->attributes->add('class', 'active');
+    public function active() {
+        if (func_num_args() > 0) {
+            if (func_get_arg(0)) {
+                $this->attributes->add('class', 'active');
+                $this->active = true;
+            } else {
+                $this->attributes->remove('class', 'active');
+                $this->active = false;
+            }
+            return $this;
         } else {
-            $this->attributes->remove('class', 'active');
+            return $this->active;
         }
-        $this->active = true;
     }
 
     /**
@@ -104,8 +141,6 @@ class MenuItem {
     {
         return $this->collection_attributes;
     }
-
-
 
     /**
      * @return mixed
@@ -156,7 +191,10 @@ class MenuItem {
      * @return string
      */
     public function renderIcon() {
-        return '<i class="fa fa-' . $this->icon . '"></i>';
+        if ($this->icon) {
+            return '<i class="fa fa-' . $this->icon . '"></i>';
+        }
+        return '';
     }
 
     /**

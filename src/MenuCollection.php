@@ -2,7 +2,6 @@
 namespace Code4\Menu;
 
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Support\Collection;
 
 class MenuCollection implements Arrayable, \IteratorAggregate {
 
@@ -73,9 +72,38 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
     }
 
 
+    /**
+     * Ustawia kolejne elementy menu jako aktywne
+     * @param $key
+     * @throws \Exception
+     */
+    public function setActiveByPath($key) {
+        if (!$this->has($key)) {
+            throw new \Exception('Element "' . $key . '" not found');
+        };
+        $segments = explode('.' ,$key);
+        $segment = array_shift($segments);
 
-    public function setActive($key) {
+        foreach ($this->menu as $el) {
+            if ($el->is($segment)) {
+                $el->setActiveByPath(implode('.', $segments));
+                break;
+            }
+        }
+    }
 
+    /**
+     * Ustawia kolejne elementy menu sprawdzając url
+     * @param $url
+     * @return bool
+     */
+    public function setActiveByUrl($url) {
+        foreach ($this->menu as $el) {
+            if ($el->setActiveByUrl($url)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -109,7 +137,6 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
         }
         return $this;
     }
-
 
     /**
      * Znajduje index elementu

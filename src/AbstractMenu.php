@@ -3,7 +3,7 @@
 namespace Code4\Menu;
 
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Routing\UrlGenerator;
+use Illuminate\Http\Request;
 use Symfony\Component\Yaml\Yaml;
 
 abstract class AbstractMenu implements MenuInterface {
@@ -14,13 +14,13 @@ abstract class AbstractMenu implements MenuInterface {
     protected $checkPermissions;
     protected $showInMenuPermission;
     protected $filesystem;
-    protected $url;
+    protected $request;
 
-    public function __construct($menuName, Filesystem $filesystem, UrlGenerator $url)
+    public function __construct($menuName, Filesystem $filesystem, Request $request)
     {
         $this->name = $menuName;
         $this->filesystem = $filesystem;
-        $this->url = $url;
+        $this->request = $request;
         //$this->init($this->loadConfig());
     }
 
@@ -28,24 +28,23 @@ abstract class AbstractMenu implements MenuInterface {
      * Builds menu from passed data
      * @param array $menuItems
      */
-    public function build($menuItems)
-    {
+    public function build($menuItems) {
         $this->menu = new MenuCollection($menuItems);
+        //Set active menus
+        $this->detectActive();
     }
 
     //Renderuje menu z wykorzystaniem widoków
     public function render($viewName = 'menu::collection') {
-
         echo view($viewName, ['items'=>$this->menu]);
-        //dd($temp);
-
     }
 
-
-
-
-
-
+    /**
+     * Detects
+     */
+    public function detectActive() {
+        $this->menu->setActiveByUrl($this->request->decodedPath());
+    }
 
 
     /**
@@ -65,6 +64,11 @@ abstract class AbstractMenu implements MenuInterface {
      */
     public function getMenuName() {
         return $this->menu;
+    }
+
+
+    public function __call($name, $arg) {
+        return call_user_func_array(array($this->menu, $name), $arg);
     }
 
 }
