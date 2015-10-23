@@ -44,7 +44,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-version]: https://img.shields.io/packagist/v/code4interactive/menu.svg?style=flat-square
 [ico-license]: https://img.shields.io/github/license/code4interactive/menu.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/code4interactive/menu/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/code4interactive/menu.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/g/code4interactive/menu.svg?style=flat-square
 [ico-circle]: https://circleci.com/gh/code4interactive/menu/tree/master.svg?style=svg
 [ico-downloads]: https://img.shields.io/packagist/dt/code4interactive/menu.svg?style=flat-square
 [link-packagist]: https://packagist.org/packages/code4interactive/menu
@@ -54,6 +54,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-downloads]: https://packagist.org/packages/code4interactive/menu
 [link-author]: https://github.com/code4interactive
 [link-contributors]: ../../contributors
-
-
 
