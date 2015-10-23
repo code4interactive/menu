@@ -2,7 +2,6 @@
 
 namespace Code4\Menu;
 
-use App\Components\Menu\MenuFactory;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 

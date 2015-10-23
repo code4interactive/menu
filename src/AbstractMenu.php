@@ -50,7 +50,7 @@ abstract class AbstractMenu implements MenuInterface {
     /**
      * Funkcja pomocznicza do ładowania menu
      * @param $yamlFilePath
-     * @return mixed
+     * @return array
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function loadMenuFromYamlFile($yamlFilePath) {
