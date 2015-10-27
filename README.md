@@ -19,9 +19,20 @@ php artisan vendor:publish --provider="Code4\Menu\MenuServiceProvider"
 ## Usage
 
 ``` php
-
+//Inicjalizacja menu zdefiniowanych w pliku konfiguracyjnym
 Menu::init();
+
+//Renderowanie menu w widoku
 Menu::get('menu-name')->render();
+
+//Renderowanie menu w customowym widoku
+Menu::get('menu-name')->render('custom_view');
+
+//Ustawianie aktywnego elementu za pomocą ścieżki z konfiguracji
+Menu::get('menu-name')->setActiveByPath('settings.roles');
+
+//Ustawianie aktywnego elementu za pomocą url (skrypt będzie próbował sam to zrobić)
+Menu::get('menu-name')->setActiveByUrl('/settings/roles');
 
 ```
 
