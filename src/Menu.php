@@ -52,7 +52,7 @@ class Menu {
     /**
      * Gets menu and its element
      * @param string $menuName
-     * @return AbstractMenu mixed
+     * @return AbstractMenu|MenuItem|MenuCollection
      * @throws \Exception
      */
     public function get($menuName) {

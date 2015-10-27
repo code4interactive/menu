@@ -46,7 +46,7 @@ class MenuItem {
      * @return bool
      */
     public function hasChildren(){
-        return (bool) is_object($this->collection) ? $this->collection->count() : false;
+        return is_object($this->collection) ? $this->collection->count() > 0 ? true : false : false;
     }
 
     /**
