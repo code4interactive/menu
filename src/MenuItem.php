@@ -56,9 +56,13 @@ class MenuItem {
      * @throws \Exception
      */
     public function setActiveByPath($key) {
-        $this->active(true);
-        if (!$key || !$this->hasChildren()) { return null; }
-        return $this->collection->setActiveByPath($key);
+        if ($key && $this->hasChildren()) {
+            $this->setActiveCollection();
+            $this->collection->setActiveByPath($key);
+        } else {
+            $this->setActiveItem();
+        }
+        return null;
     }
 
     /**
@@ -68,39 +72,64 @@ class MenuItem {
      */
     public function setActiveByUrl($url) {
         if ($this->url == '/' . ltrim($url, '/')) {
-            $this->active(true);
-            $this->collection_attributes->add('class', 'active');
-            $this->attributes->add('class', 'active');
+            $this->setActiveItem();
             return true;
         }
-        if (!$this->hasChildren()) { return false; }
-        if ($this->collection->setActiveByUrl($url)) {
-            $this->collection_attributes->add('class', 'active');
-            $this->attributes->remove('class', 'active');
-            return true;
+
+        if ($this->hasChildren()) {
+            if ($this->collection->setActiveByUrl($url)) {
+                $this->setActiveCollection();
+                return true;
+            } else {
+                return false;
+            }
         }
         return false;
     }
 
     /**
-     * Sets menu element active
-     * @return $this|bool
+     * Sets collection active
+     * @param bool|true $active
      */
-    public function active() {
-        if (func_num_args() > 0) {
-            if (func_get_arg(0)) {
-                $this->collection_attributes->add('class', 'active');
-                $this->attributes->add('class', 'active');
-                $this->active = true;
-            } else {
-                $this->collection_attributes->remove('class', 'active');
-                $this->attributes->remove('class', 'active');
-                $this->active = false;
-            }
-            return $this;
+    public function setActiveCollection($active = true) {
+        if ($active) {
+            $this->collection_attributes->add('class', 'active');
+            $this->collection_attributes->add('class', 'asa');
         } else {
-            return $this->active;
+            $this->collection_attributes->remove('class', 'active');
         }
+    }
+
+    /**
+     * Sets item active
+     * @param bool|true $active
+     */
+    public function setActiveItem($active = true) {
+        if ($active) {
+            $this->attributes->add('class', 'active');
+            $this->collection_attributes->add('class', 'active');
+            $this->active = true;
+        } else {
+            $this->attributes->remove('class', 'active');
+            $this->collection_attributes->remove('class', 'active');
+            $this->active = false;
+        }
+    }
+
+    /**
+     * Checks is item active
+     * @return bool
+     */
+    public function isItemActive() {
+        return $this->active;
+    }
+
+    /**
+     * Checks is collection active
+     * @return bool
+     */
+    public function isCollectionActive() {
+        return $this->collection_attributes->findInKey('class', 'active');
     }
 
     /**

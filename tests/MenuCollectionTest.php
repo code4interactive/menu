@@ -38,7 +38,7 @@ class MenuCollectionTest extends TestCase
         $menuCollection = new MenuCollection($this->exampleMenu);
         $menuCollection->setActiveByPath('settings.ogolne');
 
-        $this->assertEquals(true, $menuCollection->get('settings.ogolne')->active());
+        $this->assertEquals(true, $menuCollection->get('settings.ogolne')->isItemActive());
     }
 
     public function testActiveByUrl()
@@ -46,6 +46,6 @@ class MenuCollectionTest extends TestCase
         $menuCollection = new MenuCollection($this->exampleMenu);
         $menuCollection->setActiveByUrl('settings/general');
 
-        $this->assertEquals(true, $menuCollection->get('settings.ogolne')->active());
+        $this->assertEquals(true, $menuCollection->get('settings.ogolne')->isItemActive());
     }
 }
