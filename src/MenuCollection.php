@@ -47,7 +47,6 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
         return false;
     }
 
-
     /**
      * @param $key
      * @return mixed
@@ -71,7 +70,6 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
         }
     }
 
-
     /**
      * Ustawia kolejne elementy menu jako aktywne
      * @param $key
@@ -83,6 +81,8 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
         };
         $segments = explode('.' ,$key);
         $segment = array_shift($segments);
+
+        //var_dump($segments);
 
         foreach ($this->menu as $el) {
             if ($el->is($segment)) {
@@ -105,7 +105,6 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
         }
         return false;
     }
-
 
     /**
      * Ustala kolejność elementu
@@ -167,6 +166,10 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
         return $this->menu;
     }
 
+    /**
+     * Zwraca iterator kolecji
+     * @return \ArrayIterator
+     */
     public function getIterator() {
         return new \ArrayIterator($this->menu);
     }

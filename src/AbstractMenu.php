@@ -6,6 +6,11 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Class AbstractMenu
+ * @package Code4\Menu
+ * @method MenuCollection|MenuItem get(string $path)
+ */
 abstract class AbstractMenu implements MenuInterface {
 
     private $menu;
