@@ -1,7 +1,6 @@
 # Menu Package for Laravel
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE)
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Circle CI][ico-circle]](https://circleci.com/gh/code4interactive/menu/tree/master)
@@ -42,7 +41,6 @@ composer test
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/code4interactive/menu.svg?style=flat-square
-[ico-license]: https://img.shields.io/github/license/code4interactive/menu.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/code4interactive/menu/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/g/code4interactive/menu.svg?style=flat-square
 [ico-circle]: https://circleci.com/gh/code4interactive/menu/tree/master.svg?style=svg

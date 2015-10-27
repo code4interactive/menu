@@ -31,11 +31,9 @@ class Menu {
         foreach ($menus as $menuName => $menu) {
             $this->menus[$menuName] = new $menu($menuName, $this->filesystem, $this->request);
             $menuData = $this->menus[$menuName]->getConfig();
-
             $this->menus[$menuName]->build($menuData);
         }
     }
-
 
     /**
      * Gets menu from collection for chaining
@@ -43,12 +41,29 @@ class Menu {
      * @return AbstractMenu mixed
      * @throws \Exception
      */
-    public function get($menuName) {
+    public function menu($menuName) {
         if ( !array_key_exists($menuName, $this->menus))
         {
             throw new \Exception('Menu '.$menuName.' not found!');
         }
         return $this->menus[$menuName];
+    }
+
+    /**
+     * Gets menu and its element
+     * @param string $menuName
+     * @return AbstractMenu mixed
+     * @throws \Exception
+     */
+    public function get($menuName) {
+        $menuArray = explode('.', $menuName);
+        //dd($menuArray);
+        if (count($menuArray) == 1) {
+            return $this->menu($menuArray[0]);
+        } else {
+            $menuName = array_shift($menuArray);
+            return $this->menu($menuName)->get(implode('.', $menuArray));
+        }
     }
 
 
