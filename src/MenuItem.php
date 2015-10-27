@@ -70,11 +70,13 @@ class MenuItem {
         if ($this->url == '/' . ltrim($url, '/')) {
             $this->active(true);
             $this->collection_attributes->add('class', 'active');
+            $this->attributes->add('class', 'active');
             return true;
         }
         if (!$this->hasChildren()) { return false; }
         if ($this->collection->setActiveByUrl($url)) {
             $this->collection_attributes->add('class', 'active');
+            $this->attributes->remove('class', 'active');
             return true;
         }
         return false;
@@ -87,9 +89,11 @@ class MenuItem {
     public function active() {
         if (func_num_args() > 0) {
             if (func_get_arg(0)) {
+                $this->collection_attributes->add('class', 'active');
                 $this->attributes->add('class', 'active');
                 $this->active = true;
             } else {
+                $this->collection_attributes->remove('class', 'active');
                 $this->attributes->remove('class', 'active');
                 $this->active = false;
             }

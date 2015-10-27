@@ -24,7 +24,7 @@ class MenuServiceProvider extends ServiceProvider {
 
     private function registerAliases() {
         $aliasLoader = AliasLoader::getInstance();
-        $aliasLoader->alias('Assets', Facades\Menu::class);
+        $aliasLoader->alias('Menu', Facades\Menu::class);
     }
 
 }
