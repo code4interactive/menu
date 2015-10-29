@@ -18,6 +18,19 @@ class MenuCollectionTest extends TestCase
         $this->assertEquals(false,  $menuCollection->has('settings.notExisting'), 'Second level not existing');
     }
 
+    /**
+     * Testujemy czy kolejność przekazania elementów menu w konfiguracji bez wskazywania kolejności w "order"
+     * jest zachowana
+     */
+    public function testDefaultOrder() {
+        $menuCollection = new MenuCollection($this->exampleNoOrder);
+        $lp = 1;
+        foreach($menuCollection->toArray() as $el) {
+            $this->assertEquals('Pos '.$lp, $el->getTitle(), 'Menu item "'.$el->getKey().' order: '.$lp.'');
+            $lp++;
+        }
+    }
+
     public function testOrder()
     {
         $menuCollection = new MenuCollection($this->exampleOrder);

@@ -57,16 +57,34 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
         'showInMenu'  => 'settings.showInMenu'
     ];
 
-
+    protected $exampleNoOrder = [
+        'asdf' => [
+            'title'       => 'Pos 1'
+        ],
+        'zxcv' => [
+            'title'       => 'Pos 2'
+        ],
+        'dfgh' => [
+            'title'       => 'Pos 3'
+        ],
+        'erty' => [
+            'title'       => 'Pos 4'
+        ],
+        'bnm' => [
+            'title'       => 'Pos 5'
+        ],
+        'asaw' => [
+            'title'       => 'Pos 6'
+        ]
+    ];
 
     protected $exampleOrder = [
         'pos1' => [
-            'title'       => 'Ustawienia',
-            'order'        => 10
+            'title'       => 'Ustawienia'
         ],
         'pos2' => [
             'title'       => 'Ustawienia',
-            'order'        => 20
+            'order'       => 1
         ],
         'pos4' => [
             'title'       => 'Ustawienia',
