@@ -54,7 +54,7 @@ abstract class AbstractMenu implements MenuInterface {
 
     /**
      * Funkcja pomocznicza do ładowania menu
-     * @param $yamlFilePath
+     * @param string $yamlFilePath
      * @return array
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
@@ -68,7 +68,7 @@ abstract class AbstractMenu implements MenuInterface {
      * @return string
      */
     public function getMenuName() {
-        return $this->menu;
+        return $this->name;
     }
 
 

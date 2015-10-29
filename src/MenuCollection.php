@@ -23,7 +23,7 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
                 $this->menu[] = new MenuItem($key, $item);
             }
         }
-        asort($this->menu);
+        ksort($this->menu);
         $this->menu = array_values($this->menu);
     }
 
@@ -140,7 +140,7 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
     /**
      * Znajduje index elementu
      * @param $key
-     * @return int|null|string
+     * @return integer|null
      */
     public function indexOf($key) {
         $lp = 0;
