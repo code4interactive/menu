@@ -137,6 +137,20 @@ class MenuCollection implements Arrayable, \IteratorAggregate {
         return $this;
     }
 
+
+    /**
+     * Zamienia szukaną frazę w URL. Pozwala na dynamiczne podstawianie np. ID usera w link menu.
+     * @param $term
+     * @param $value
+     * @param bool $recursive
+     */
+    public function replaceTermInUrl($term, $value, $recursive = false) {
+        foreach ($this->menu as $el) {
+            $el->replaceTermInUrl($term, $value, $recursive);
+        }
+    }
+
+
     /**
      * Znajduje index elementu
      * @param $key

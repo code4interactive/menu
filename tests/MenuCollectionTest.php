@@ -61,4 +61,14 @@ class MenuCollectionTest extends TestCase
 
         $this->assertEquals(true, $menuCollection->get('settings.ogolne')->isItemActive());
     }
+
+    public function testReplaceTermInUrl() {
+        $menuCollection = new MenuCollection($this->exampleMenu);
+        $menuCollection->replaceTermInUrl('{user_id}', '12');
+
+        $this->assertEquals('/administration/user/{user_id}', $menuCollection->get('settings.user')->getUrl());
+
+        $menuCollection->replaceTermInUrl('{user_id}', '12', true);
+        $this->assertEquals('/administration/user/12', $menuCollection->get('settings.user')->getUrl());
+    }
 }

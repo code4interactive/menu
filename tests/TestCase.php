@@ -37,6 +37,12 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
                     'icon'  => 'users',
                     'order' => 10
                 ],
+                'user'      => [
+                    'title' => 'Użytkownik',
+                    'url'   => 'administration/user/{user_id}',
+                    'icon'  => 'users',
+                    'order' => 10
+                ],
                 'roles'      => [
                     'title'      => 'Role',
                     'url'        => 'administration/roles',

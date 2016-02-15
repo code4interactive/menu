@@ -160,6 +160,21 @@ class MenuItem {
     }
 
     /**
+     * Zamienia szukaną frazę w URL. Pozwala na dynamiczne podstawianie np. ID usera w link menu.
+     * @param $term
+     * @param $value
+     * @param bool $recursive
+     * @return bool
+     */
+    public function replaceTermInUrl($term, $value, $recursive = false) {
+        $this->url = str_replace($term, $value, $this->url);
+        if ($this->hasChildren() && $recursive) {
+            $this->collection->replaceTermInUrl($term, $value, $recursive);
+        }
+        return false;
+    }
+
+    /**
      * @return Attributes
      */
     public function attributes()
