@@ -34,6 +34,10 @@ Menu::get('menu-name')->setActiveByPath('settings.roles');
 //Ustawianie aktywnego elementu za pomocą url (skrypt będzie próbował sam to zrobić)
 Menu::get('menu-name')->setActiveByUrl('/settings/roles');
 
+//Podmienianie frazy w url (np. /administration/user/{user_id}
+//Trzeci parametr oznacza wyszukiwanie rekurencyjne w potomkach (default: false)
+Menu::get('menu-name')->replaceTermInUrl('{user_id}', '12', true);
+
 ```
 
 ## Testing
